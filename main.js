@@ -153,7 +153,8 @@ class FormMatches {
             }
         }
 
-        // TODO: sort scores
+        scores.sort((a, b) => b.winsBlack - a.winsBlack)
+        scores.sort((a, b) => b.score - a.score)
 
         const table = document.createElement('table')
         const thead = table.createTHead()
