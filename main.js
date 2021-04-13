@@ -8,6 +8,12 @@ class Player {
     }
 }
 
+// Custom RNG function: generates a "random" value 0 <= num < 1
+const randomGenerator = (seed) => ((seed * 5486230734 + 6908969830) % 9853205067) / 9853205067
+
+// Custom shuffle function based on seed
+const shuffle = (array, seed) => array.sort(() => (seed = randomGenerator(seed) > .5) ? 1 : -1)
+
 class FormPlayers {
     constructor (
         playersFormId,
@@ -85,7 +91,8 @@ class FormMatches {
     generateMatches = () => {
         this.players = this.formPlayers.getPlayersList()
         this.matches = this.possibleMatches[this.players.length]
-        // TODO: shuffle matches using random seed
+        // TODO: this shuffle does not seem reliable. Investigate.
+        shuffle(this.players, this.randomSeedInput.value)
         const table = document.createElement('table')
         const thead = table.createTHead()
         thead.innerHTML = '<tr><th>Match ID</th><th>White Player</th><th>Result</th>\
