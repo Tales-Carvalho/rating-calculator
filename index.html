@@ -1,18 +1,51 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="main.js" defer></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="js/form-matches.js"></script>
+        <script src="js/form-players.js"></script>
+        <script src="js/main.js" defer></script>
     </head>
     <body>
-        <div id="tourneyForm">
-            <button id="tourneyAddPlayer">Add player</button>
-            <button id="tourneyRemovePlayer">Remove player</button>
-            <form id="tourneyPlayers"></form>
-            <label for="randomSeedInput">Random seed for matches</label>
-            <input type="number" id="randomSeedInput" value="1" min="0">
-            <button id="generateMatches">Generate Matches</button>
-            <div id="tourneyMatches"></div>
-            <div id="tourneyStandings"></div>
+        <div class="container">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs nav-justified">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#tourney">Tourney</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#players">Players</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#ratings">Ratings</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tourney" class="container tab-pane active"><br>
+                    <div id="tourneyForm" class="form-group">
+                        <h2 class="">Players</h2>
+                        <button id="tourneyAddPlayer" class="btn btn-primary">Add player</button>
+                        <button id="tourneyRemovePlayer" class="btn btn-primary">Remove player</button>
+                        <form id="tourneyPlayers" class="form-inline"></form>
+                        <label for="randomSeedInput">Random seed for matches</label>
+                        <input type="number" class="form-control" id="randomSeedInput" value="1" min="0">
+                        <button id="generateMatches" class="btn btn-primary">Generate Matches</button>
+                        <div id="tourneyMatches"></div>
+                        <div id="tourneyStandings"></div>
+                    </div>
+                </div>
+                <div id="players" class="container tab-pane fade"><br>
+                    <h3>TODO</h3>
+                </div>
+                <div id="ratings" class="container tab-pane fade"><br>
+                    <h3>TODO</h3>
+                </div>
+            </div>
         </div>
     </body>
 </html>
