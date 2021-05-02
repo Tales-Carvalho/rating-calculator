@@ -7,13 +7,21 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@0.1.1"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/google-palette/1.1.0/palette.min.js"></script>
         <script src="js/form-matches.js"></script>
         <script src="js/form-players.js"></script>
+        <script src="js/player.js"></script>
+        <script src="js/match.js"></script>
+        <script src="js/tourney.js"></script>
+        <script src="js/utils.js"></script>
         <script src="js/main.js" defer></script>
     </head>
     <body>
         <div class="container">
-            <!-- Nav tabs -->
+            <button id="importJsonData" class="btn btn-primary">Import data from file</button>
             <ul class="nav nav-tabs nav-justified">
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#tourney">Tourney</a>
@@ -27,6 +35,7 @@
             </ul>
             <div class="tab-content">
                 <div id="tourney" class="container tab-pane active"><br>
+                    <button id="newTourney" class="btn btn-primary">New Tourney</button>
                     <div id="tourneyForm" class="form-group">
                         <h2 class="">Players</h2>
                         <button id="tourneyAddPlayer" class="btn btn-primary">Add player</button>
@@ -43,7 +52,10 @@
                     <h3>TODO</h3>
                 </div>
                 <div id="ratings" class="container tab-pane fade"><br>
-                    <h3>TODO</h3>
+                    <button id="calculateRatings" class="btn btn-primary">Calculate Ratings</button>
+                    <div id="chartWrapper">
+                        <canvas id="ratingsChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
