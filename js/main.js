@@ -39,7 +39,7 @@ document.getElementById('importJsonData').addEventListener('click', ev => {
         for (const t of data.Tourneys) {
             const matches = []
             for (const m of t.Matches) {
-                matches.push(new Match(players[m.Player1ID - 1], players[m.Player2ID - 1], m.Result))
+                matches.push(new Match(players[m.PlayerWhite], players[m.PlayerBlack], m.Result))
             }
             tourneys.push(new Tourney(players, 1, new Date(t.Date), matches))
         }
@@ -57,30 +57,18 @@ document.getElementById('newTourney').addEventListener('click', ev => {
 const eloVariation = eloDiff => 1 / (1 + Math.exp(-eloDiff * Math.log(10) / 400 ))
 
 document.getElementById('calculateRatings').addEventListener('click', ev => {
-    const initialRating = 1500
     const k = 40
 
     for (const p of players) {
         p.ratingsHistory = []
-        p.ratingsHistory.push({date: new Date('2017-12-01'), rating: initialRating})
-        p.rating = initialRating
+        p.ratingsHistory.push({date: new Date('2017-12-01'), rating: p.rating})
     }
 
     for (const t of tourneys) {
         for (const m of t.matches) {
             const eloVar = eloVariation(m.playerWhite.rating - m.playerBlack.rating)
-            if (m.result == 'W') {
-                m.playerWhite.rating += k * (1 - eloVar)
-                m.playerBlack.rating -= k * (1 - eloVar)
-            }
-            if (m.result == 'D') {
-                m.playerWhite.rating += k * (0.5 - eloVar)
-                m.playerBlack.rating -= k * (0.5 - eloVar)
-            }
-            if (m.result == 'L') {
-                m.playerWhite.rating += k * (0 - eloVar)
-                m.playerBlack.rating -= k * (0 - eloVar)
-            }
+            m.playerWhite.rating += k * (Match.numberResults[m.result] - eloVar)
+            m.playerBlack.rating -= k * (Match.numberResults[m.result] - eloVar)
         }
         for (const p of players) {
             p.ratingsHistory.push({date: t.date, rating: p.rating})
@@ -91,13 +79,13 @@ document.getElementById('calculateRatings').addEventListener('click', ev => {
     
     const colors = palette('tol', players.length).map(hex => '#' + hex)
 
-    let i = 0
-    for (const p of players) {
+    for (let i in players) {
         ratingsChart.data.datasets.push({
-            data: p.ratingsHistory,
-            label: p.name,
+            data: players[i].ratingsHistory,
+            label: players[i].name,
             backgroundColor: colors[i],
-            borderColor: colors[i++]
+            borderColor: colors[i],
+            tension: 0.3
         })
     }
 

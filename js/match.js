@@ -11,4 +11,10 @@ class Match {
         'D': '0.5-0.5',
         'L': '0-1'
     }
+
+    static numberResults = {
+        'W': 1,
+        'D': 0.5,
+        'L': 0
+    }
 }
